@@ -1,15 +1,30 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
+  height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
   font-family: Arial, Helvetica, sans-serif;
 }
 .wrapper {
   text-align: center;
+}
+
+.shopping {
   width: 500px;
+  height: 700px;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  overflow-y: scroll;
+}
+
+h1 {
+  margin: 40px;
 }
 
 input {
@@ -40,18 +55,22 @@ li {
   display: flex;
   justify-content: left;
   width: 100%;
-  margin: 7px;
+  padding: 7px;
   list-style: none;
   font-size: 1.2rem;
   font-weight: 500;
+  overflow-wrap: normal;
 }
 
 .item {
-  width: 80%;
+  width: 70%;
 }
 
 .delete {
-  font-size: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  width: 5%;
   background: rgb(255, 0, 0);
   margin: 0;
 }
