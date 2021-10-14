@@ -18,12 +18,14 @@ function addTask(e) {
 }
 
 function removeTask(e) {
-  const item = e.target.parentNode;
-  item.remove();
-  tasksList = tasksList.filter((task) => task !== item.id);
-  console.info("Task Removed.");
+  if (e.target.matches(".delete")) {
+    const item = e.target.parentNode;
+    item.remove();
+    tasksList = tasksList.filter((task) => task !== item.id);
+    console.info("Task Removed.");
 
-  list.dispatchEvent(new CustomEvent("itemsUpdate"));
+    list.dispatchEvent(new CustomEvent("itemsUpdate"));
+  }
 }
 
 function updateLocalStorage() {
