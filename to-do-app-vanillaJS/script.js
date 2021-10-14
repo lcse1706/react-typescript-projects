@@ -1,7 +1,9 @@
-const input = document.querySelector('input');
-const button = document.querySelector('.add');
-const list = document.querySelector('.list');
-const remove = document.querySelectorAll('.delete');
+//repar only X delete Li
+
+const input = document.querySelector("input");
+const button = document.querySelector(".add");
+const list = document.querySelector(".list");
+const remove = document.querySelectorAll(".delete");
 
 let tasksList = [];
 
@@ -10,30 +12,30 @@ function addTask(e) {
 
   //Add to array
   tasksList.push(name);
-  console.info('Task Added');
+  console.info("Task Added");
 
-  list.dispatchEvent(new CustomEvent('itemsUpdate'));
+  list.dispatchEvent(new CustomEvent("itemsUpdate"));
 }
 
 function removeTask(e) {
   const item = e.target.parentNode;
   item.remove();
   tasksList = tasksList.filter((task) => task !== item.id);
-  console.info('Task Removed.');
+  console.info("Task Removed.");
 
-  list.dispatchEvent(new CustomEvent('itemsUpdate'));
+  list.dispatchEvent(new CustomEvent("itemsUpdate"));
 }
 
 function updateLocalStorage() {
-  localStorage.setItem('items', tasksList.join());
+  localStorage.setItem("items", tasksList.join());
 }
 
 function restoreListFromStorage() {
   if (localStorage.items.length > 0) {
-    tasksList = localStorage.getItem('items').split(',');
-    console.info('List Loaded');
+    tasksList = localStorage.getItem("items").split(",");
+    console.info("List Loaded");
 
-    list.dispatchEvent(new CustomEvent('restoreList'));
+    list.dispatchEvent(new CustomEvent("restoreList"));
   }
 }
 
@@ -42,13 +44,14 @@ function displayList() {
     const html = tasksList
       .map(
         (item) => `
-      <li id='${item}'>
+      <li id='${item}'><span class="item">
       ${item}
+      </span>
       <button type='button' class='delete'>x</button>
       </li>
     `
       )
-      .join('');
+      .join("");
     list.innerHTML = html;
   }
 }
@@ -57,16 +60,16 @@ function handleSubmit(e) {
   e.preventDefault();
   if (e.target.input.value) {
     addTask(e);
-    e.target.input.value = '';
+    e.target.input.value = "";
     return;
   }
-  alert('type task');
+  alert("type task");
 }
 
-window.addEventListener('submit', handleSubmit);
-list.addEventListener('click', removeTask);
-list.addEventListener('itemsUpdate', displayList);
-list.addEventListener('itemsUpdate', updateLocalStorage);
-list.addEventListener('restoreList', displayList);
+window.addEventListener("submit", handleSubmit);
+list.addEventListener("click", removeTask);
+list.addEventListener("itemsUpdate", displayList);
+list.addEventListener("itemsUpdate", updateLocalStorage);
+list.addEventListener("restoreList", displayList);
 
 restoreListFromStorage();
