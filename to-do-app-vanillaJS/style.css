@@ -19,7 +19,7 @@ body {
   width: 500px;
   height: 700px;
   border: 1px solid black;
-  border-radius: 0.5rem;
+  border-radius: 5px;
   overflow-y: scroll;
 }
 
@@ -31,7 +31,7 @@ input {
   height: 30px;
   width: 300px;
   border: 1px solid black;
-  border-radius: 0.5rem;
+  border-radius: 5px;
   text-indent: 2%;
 }
 
@@ -39,7 +39,7 @@ input {
   height: 30px;
   width: 150px;
   border: 1px solid black;
-  border-radius: 0.5rem;
+  border-radius: 5px;
   background-color: blueviolet;
   color: white;
   font-weight: 700;
@@ -77,4 +77,23 @@ li {
 
 .blue {
   color: blueviolet;
+}
+
+/* Custom scroll bar */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lightgray;
+  border-radius: 5px;
 }
