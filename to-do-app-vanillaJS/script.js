@@ -1,6 +1,6 @@
 //repar only X delete Li
 
-const input = document.querySelector('input');
+// const input = document.querySelector('input');
 const button = document.querySelector('.add');
 const list = document.querySelector('.list');
 const remove = document.querySelectorAll('.delete');

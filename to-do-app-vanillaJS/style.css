@@ -1,3 +1,6 @@
+/* do something with item apperiance. */
+/* custom allerts */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,31 +8,35 @@
 }
 
 body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-family: Arial, Helvetica, sans-serif;
 }
 .wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   text-align: center;
 }
 
 .shopping {
-  width: 500px;
-  height: 700px;
+  width: 90%;
+  height: 90%;
+  max-width: 500px;
+  max-height: 700px;
   border: 1px solid black;
   border-radius: 5px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 h1 {
-  margin: 40px;
+  margin: 8%;
 }
 
 input {
   height: 30px;
-  width: 300px;
+  width: 60%;
   border: 1px solid black;
   border-radius: 5px;
   text-indent: 2%;
@@ -37,7 +44,7 @@ input {
 
 .add {
   height: 30px;
-  width: 150px;
+  width: 30%;
   border: 1px solid black;
   border-radius: 5px;
   background-color: blueviolet;
@@ -70,9 +77,9 @@ li {
   font-size: 0.8rem;
   font-weight: 700;
   color: white;
-  width: 5%;
+  width: 1.4rem;
+  height: 1.4rem;
   background: rgb(255, 0, 0);
-  margin: 0;
 }
 
 .blue {
