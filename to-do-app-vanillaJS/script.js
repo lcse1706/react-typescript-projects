@@ -1,9 +1,12 @@
-//repar only X delete Li
+// must be indentified by id becouse when name is the same, program delete every value with the same name from local Storage
+// checked 
+
+
 
 // const input = document.querySelector('input');
-const button = document.querySelector('.add');
+// const button = document.querySelector('.add');
+// const remove = document.querySelectorAll('.delete');
 const list = document.querySelector('.list');
-const remove = document.querySelectorAll('.delete');
 
 let tasksList = [];
 
