@@ -1,7 +1,5 @@
 // must be indentified by id becouse when name is the same, program delete every value with the same name from local Storage
-// checked 
-
-
+// checked
 
 // const input = document.querySelector('input');
 // const button = document.querySelector('.add');
@@ -24,7 +22,7 @@ function removeTask(e) {
   if (e.target.matches('.delete')) {
     const item = e.target.parentNode;
     item.remove();
-    tasksList = tasksList.filter((task) => task !== item.id);
+    tasksList = tasksList.filter(task => task !== item.id);
     console.info('Task Removed.');
 
     list.dispatchEvent(new CustomEvent('itemsUpdate'));
@@ -48,7 +46,7 @@ function displayList() {
   if (tasksList.length > 0) {
     const html = tasksList
       .map(
-        (item) => `
+        item => `
       <li id='${item}'><span class="item">
       ${item}
       </span>
