@@ -1,9 +1,8 @@
 import React from 'react';
 
 const TaskForm = props => {
-  const deleteTaskHandler = event => {
-    event.preventDefault();
-    console.log(event.target.value);
+  const deleteTaskHandler = () => {
+    props.deleteTaskHandler(props.item.key);
   };
 
   return (
