@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import NewTask from './components/NewTask/NewTask';
@@ -7,15 +7,40 @@ import Tasks from './components/Tasks/Tasks';
 function App() {
   const [tasks, setTasks] = useState([]);
 
-  const addTaskHandler = task => {
-    // const savedTasks = [];
-    // for (const task in tasks) {
-    //   savedTasks.push(task);
-    // }
+  useEffect(() => {
+    async function fetchTasks() {
+      const response = await fetch(
+        'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json'
+      );
+      const data = await response.json();
+
+      const loadedTasks = [];
+
+      for (const item in data) {
+        loadedTasks.push({ key: data[item].key, text: data[item].text });
+      }
+      setTasks(loadedTasks);
+    }
+
+    fetchTasks();
+  }, []);
+
+  async function addTaskHandler(task) {
     setTasks(tasks.concat(task));
-    console.log(task);
-    // console.log(tasks);
-  };
+
+    const response = await fetch(
+      'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json',
+      {
+        method: 'POST',
+        body: JSON.stringify(task),
+        headers: {
+          'Content-type': 'application/json',
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+  }
 
   const deleteTaskHandler = key => {
     setTasks(tasks.filter(task => task.key !== key));
