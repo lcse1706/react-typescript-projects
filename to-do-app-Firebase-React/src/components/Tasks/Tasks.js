@@ -6,20 +6,19 @@ import TaskForm from './TaskForm';
 
 const Tasks = props => {
   const deleteTaskHandler = key => {
+    console.log(key);
     props.deleteTaskHandler(key);
   };
   return (
-    <Section>
-      <ul>
-        {props.items.map(task => (
-          <TaskForm
-            key={task.key}
-            item={task}
-            deleteTaskHandler={deleteTaskHandler}
-          />
-        ))}
-      </ul>
-    </Section>
+    <ul>
+      {props.items.map(task => (
+        <TaskForm
+          key={task.key}
+          item={task}
+          deleteTaskHandler={deleteTaskHandler}
+        />
+      ))}
+    </ul>
   );
 };
 

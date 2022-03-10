@@ -3,12 +3,16 @@ import './App.css';
 
 import NewTask from './components/NewTask/NewTask';
 import Tasks from './components/Tasks/Tasks';
+import Section from './components/UI/Section';
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  const [isFetching, setFetching] = useState(false);
 
   useEffect(() => {
     async function fetchTasks() {
+      setLoading(true);
       const response = await fetch(
         'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json'
       );
@@ -18,16 +22,15 @@ function App() {
       for (const item in data) {
         loadedTasks.push({ key: item, text: data[item].text });
       }
+
       setTasks(loadedTasks);
+      setLoading(false);
     }
     fetchTasks();
-    console.log(tasks);
-  }, []);
+  }, [isFetching]);
 
   async function addTaskHandler(task) {
-    setTasks(tasks.concat(task));
-
-    const response = await fetch(
+    await fetch(
       'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json',
       {
         method: 'POST',
@@ -37,24 +40,30 @@ function App() {
         },
       }
     );
-    const data = await response.json();
-    console.log(data);
+    setFetching(!isFetching);
+    // setTasks(tasks.concat(task));
   }
 
   const deleteTaskHandler = async key => {
-    setTasks(tasks.filter(task => task.key !== key));
-
     await fetch(
       `https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp/${key}.json`,
       {
         method: 'DELETE',
       }
     );
+    // setTasks(tasks.filter(task => task.key !== key));
+    setFetching(!isFetching);
   };
   return (
     <React.Fragment>
       <NewTask addTaskHandler={addTaskHandler} />
-      <Tasks items={tasks} deleteTaskHandler={deleteTaskHandler} />
+      <Section>
+        {isLoading ? (
+          'Loading...'
+        ) : (
+          <Tasks items={tasks} deleteTaskHandler={deleteTaskHandler} />
+        )}
+      </Section>
     </React.Fragment>
   );
 }

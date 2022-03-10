@@ -2,6 +2,7 @@ import React from 'react';
 
 const TaskForm = props => {
   const deleteTaskHandler = () => {
+    console.log(props.item.key);
     props.deleteTaskHandler(props.item.key);
   };
 

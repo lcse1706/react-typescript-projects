@@ -29,11 +29,11 @@ const NewTask = props => {
     event.preventDefault();
 
     const enteredValue = {
-      key: Math.random(),
+      // key: Math.random(),
       text: taskInputRef.current.value,
     };
-    // console.log(enteredValue);
     props.addTaskHandler(enteredValue);
+    taskInputRef.current.value = '';
   };
 
   return (
