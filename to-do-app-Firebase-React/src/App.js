@@ -15,14 +15,13 @@ function App() {
       const data = await response.json();
 
       const loadedTasks = [];
-
       for (const item in data) {
-        loadedTasks.push({ key: data[item].key, text: data[item].text });
+        loadedTasks.push({ key: item, text: data[item].text });
       }
       setTasks(loadedTasks);
     }
-
     fetchTasks();
+    console.log(tasks);
   }, []);
 
   async function addTaskHandler(task) {
@@ -42,10 +41,16 @@ function App() {
     console.log(data);
   }
 
-  const deleteTaskHandler = key => {
+  const deleteTaskHandler = async key => {
     setTasks(tasks.filter(task => task.key !== key));
-  };
 
+    await fetch(
+      `https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp/${key}.json`,
+      {
+        method: 'DELETE',
+      }
+    );
+  };
   return (
     <React.Fragment>
       <NewTask addTaskHandler={addTaskHandler} />
