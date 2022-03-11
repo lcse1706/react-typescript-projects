@@ -3,26 +3,29 @@ import './App.css';
 
 import NewTask from './components/NewTask/NewTask';
 import Tasks from './components/Tasks/Tasks';
-import Section from './components/UI/Section';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [isSending, setSending] = useState(false);
+  const [error, setError] = useState(null);
 
   async function fetchTasks() {
-    setLoading(true);
-    const response = await fetch(
-      'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json'
-    );
-    const data = await response.json();
+    try {
+      setLoading(true);
+      const response = await fetch(
+        'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json'
+      );
+      const data = await response.json();
 
-    const loadedTasks = [];
-    for (const item in data) {
-      loadedTasks.push({ key: item, text: data[item].text });
+      const loadedTasks = [];
+      for (const item in data) {
+        loadedTasks.push({ key: item, text: data[item].text });
+      }
+      setTasks(loadedTasks);
+    } catch (error) {
+      setError(error.message || 'Something went wrong!');
     }
-
-    setTasks(loadedTasks);
     setLoading(false);
   }
 
@@ -64,13 +67,16 @@ function App() {
   return (
     <React.Fragment>
       <NewTask loading={isSending} addTaskHandler={addTaskHandler} />
-      <Section>
-        {isLoading ? (
-          <p style={{ textAlign: 'center' }}>Loading...</p>
-        ) : (
-          <Tasks items={tasks} deleteTaskHandler={deleteTaskHandler} />
-        )}
-      </Section>
+      {isLoading ? (
+        <p style={{ textAlign: 'center' }}>Loading...</p>
+      ) : (
+        <Tasks
+          error={error}
+          items={tasks}
+          deleteTaskHandler={deleteTaskHandler}
+          onFetch={fetchTasks}
+        />
+      )}
     </React.Fragment>
   );
 }
