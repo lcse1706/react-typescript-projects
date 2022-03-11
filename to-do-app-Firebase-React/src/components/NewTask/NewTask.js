@@ -29,7 +29,6 @@ const NewTask = props => {
     event.preventDefault();
 
     const enteredValue = {
-      // key: Math.random(),
       text: taskInputRef.current.value,
     };
     props.addTaskHandler(enteredValue);

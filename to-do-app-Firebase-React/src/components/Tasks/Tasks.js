@@ -6,7 +6,6 @@ import TaskForm from './TaskForm';
 
 const Tasks = props => {
   const deleteTaskHandler = key => {
-    console.log(key);
     props.deleteTaskHandler(key);
   };
   return (

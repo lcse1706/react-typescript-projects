@@ -8,29 +8,31 @@ import Section from './components/UI/Section';
 function App() {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [isFetching, setFetching] = useState(false);
+  const [isSending, setSending] = useState(false);
+
+  async function fetchTasks() {
+    setLoading(true);
+    const response = await fetch(
+      'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json'
+    );
+    const data = await response.json();
+
+    const loadedTasks = [];
+    for (const item in data) {
+      loadedTasks.push({ key: item, text: data[item].text });
+    }
+
+    setTasks(loadedTasks);
+    setLoading(false);
+  }
 
   useEffect(() => {
-    async function fetchTasks() {
-      setLoading(true);
-      const response = await fetch(
-        'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json'
-      );
-      const data = await response.json();
-
-      const loadedTasks = [];
-      for (const item in data) {
-        loadedTasks.push({ key: item, text: data[item].text });
-      }
-
-      setTasks(loadedTasks);
-      setLoading(false);
-    }
     fetchTasks();
-  }, [isFetching]);
+  }, []);
 
   async function addTaskHandler(task) {
-    await fetch(
+    setSending(true);
+    const response = await fetch(
       'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json',
       {
         method: 'POST',
@@ -40,26 +42,31 @@ function App() {
         },
       }
     );
-    setFetching(!isFetching);
-    // setTasks(tasks.concat(task));
+
+    const data = await response.json();
+
+    const singleTask = { key: data.name, text: task.text };
+
+    setTasks(prevTasks => prevTasks.concat(singleTask));
+    setSending(false);
   }
 
   const deleteTaskHandler = async key => {
-    await fetch(
+    const response = await fetch(
       `https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp/${key}.json`,
       {
         method: 'DELETE',
       }
     );
-    // setTasks(tasks.filter(task => task.key !== key));
-    setFetching(!isFetching);
+
+    setTasks(prevTasks => prevTasks.filter(task => task.key !== key));
   };
   return (
     <React.Fragment>
-      <NewTask addTaskHandler={addTaskHandler} />
+      <NewTask loading={isSending} addTaskHandler={addTaskHandler} />
       <Section>
         {isLoading ? (
-          'Loading...'
+          <p style={{ textAlign: 'center' }}>Loading...</p>
         ) : (
           <Tasks items={tasks} deleteTaskHandler={deleteTaskHandler} />
         )}
