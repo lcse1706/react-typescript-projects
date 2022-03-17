@@ -1,11 +1,13 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import Section from '../UI/Section';
 import styled from 'styled-components';
+import ErrorMessage from '../UI/ErrorMessage';
 
 const FormControl = styled.form`
   display: flex;
   flex-wrap: wrap;
+  transition: 1s;
 
   & label {
     width: 100%;
@@ -20,13 +22,23 @@ const FormControl = styled.form`
   & button {
     display: inline-block;
   }
+
+  & ErrorMessage {
+  }
 `;
 
 const NewTask = props => {
+  const [errorInput, setErrorInput] = useState(null);
   const taskInputRef = useRef();
 
   const submitHandler = event => {
     event.preventDefault();
+
+    if (taskInputRef.current.value.trim() === '') {
+      setErrorInput('Please type your task !');
+      setTimeout(() => setErrorInput(false), 2000);
+      return;
+    }
 
     const enteredValue = {
       text: taskInputRef.current.value,
@@ -41,6 +53,7 @@ const NewTask = props => {
         <label htmlFor='task'>Task Name</label>
         <input type='text' id='task' ref={taskInputRef}></input>
         <button>{props.loading ? 'Sending...' : 'Add Task'}</button>
+        {errorInput && <ErrorMessage message={errorInput} />}
       </FormControl>
     </Section>
   );

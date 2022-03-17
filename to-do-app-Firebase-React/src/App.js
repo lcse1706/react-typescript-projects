@@ -11,7 +11,7 @@ function App() {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { sendRequest, data } = useHttp();
+  const { sendRequest } = useHttp();
 
   async function fetchTasks() {
     try {
