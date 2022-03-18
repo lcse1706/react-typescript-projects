@@ -7,7 +7,7 @@ import ErrorMessage from '../UI/ErrorMessage';
 const FormControl = styled.form`
   display: flex;
   flex-wrap: wrap;
-  transition: 1s;
+  transition: ease 0.3s;
 
   & label {
     width: 100%;
@@ -22,20 +22,19 @@ const FormControl = styled.form`
   & button {
     display: inline-block;
   }
-
-  & ErrorMessage {
-  }
 `;
 
 const NewTask = props => {
-  const [errorInput, setErrorInput] = useState(null);
+  const [errorInput, setErrorInput] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const taskInputRef = useRef();
 
   const submitHandler = event => {
     event.preventDefault();
 
     if (taskInputRef.current.value.trim() === '') {
-      setErrorInput('Please type your task !');
+      setErrorInput(true);
+      setErrorMessage('Please type your task !');
       setTimeout(() => setErrorInput(false), 2000);
       return;
     }
@@ -53,7 +52,10 @@ const NewTask = props => {
         <label htmlFor='task'>Task Name</label>
         <input type='text' id='task' ref={taskInputRef}></input>
         <button>{props.loading ? 'Sending...' : 'Add Task'}</button>
-        {errorInput && <ErrorMessage message={errorInput} />}
+        {/* {errorInput && (
+          <ErrorMessage errorInput={errorInput} message={errorMessage} />
+        )} */}
+        <ErrorMessage errorInput={errorInput} message={errorMessage} />
       </FormControl>
     </Section>
   );
