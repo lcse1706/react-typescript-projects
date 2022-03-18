@@ -25,17 +25,15 @@ const FormControl = styled.form`
 `;
 
 const NewTask = props => {
-  const [errorInput, setErrorInput] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(false);
   const taskInputRef = useRef();
 
   const submitHandler = event => {
     event.preventDefault();
 
     if (taskInputRef.current.value.trim() === '') {
-      setErrorInput(true);
       setErrorMessage('Please type your task !');
-      setTimeout(() => setErrorInput(false), 2000);
+      setTimeout(() => setErrorMessage(false), 1900);
       return;
     }
 
@@ -55,7 +53,7 @@ const NewTask = props => {
         {/* {errorInput && (
           <ErrorMessage errorInput={errorInput} message={errorMessage} />
         )} */}
-        <ErrorMessage errorInput={errorInput} message={errorMessage} />
+        <ErrorMessage message={errorMessage} />
       </FormControl>
     </Section>
   );
