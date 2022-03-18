@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Section from '../UI/Section';
-
 import TaskForm from './TaskForm';
+
+const List = styled.ul`
+  list-style: square;
+`;
 
 const Tasks = props => {
   const deleteTaskHandler = key => {
@@ -29,7 +31,7 @@ const Tasks = props => {
     );
   }
 
-  return <Section>{content}</Section>;
+  return <List>{content} </List>;
 };
 
 export default Tasks;

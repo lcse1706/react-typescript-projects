@@ -3,8 +3,7 @@ import styled, { css } from 'styled-components';
 
 const Message = styled.p`
   width: 100%;
-  /* transform: scale(0); */
-  /* margin-top: 1rem; */
+  height: 1rem;
   color: red;
   transition: 0.2s ease;
   @keyframes showError {

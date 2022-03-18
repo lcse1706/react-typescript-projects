@@ -4,6 +4,7 @@ import useHttp from './components/hooks/use-http';
 
 import NewTask from './components/NewTask/NewTask';
 import Tasks from './components/Tasks/Tasks';
+import Section from './components/UI/Section';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -80,7 +81,7 @@ function App() {
     setTasks(prevTasks => prevTasks.filter(task => task.key !== key));
   };
   return (
-    <React.Fragment>
+    <Section>
       <NewTask loading={isSending} addTaskHandler={addTaskHandler} />
       {isLoading ? (
         <p style={{ textAlign: 'center' }}>Loading...</p>
@@ -92,7 +93,7 @@ function App() {
           onFetch={fetchTasks}
         />
       )}
-    </React.Fragment>
+    </Section>
   );
 }
 
