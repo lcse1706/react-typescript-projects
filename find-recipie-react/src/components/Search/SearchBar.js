@@ -4,12 +4,12 @@ import Button from '../UI/Button';
 
 const Form = styled.form``;
 
-const SearchBar = () => {
+const SearchBar = props => {
   const mealInputPhrase = useRef();
 
   const mealFinderHandler = e => {
     e.preventDefault();
-    console.log(mealInputPhrase.current.value);
+    props.search(mealInputPhrase.current.value);
   };
 
   return (
