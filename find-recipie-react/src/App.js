@@ -30,11 +30,12 @@ function App() {
       searchedMeals.push({
         name: meal.strMeal,
         text: meal.strInstructions,
+        img: meal.strMealThumb,
         ingredients,
       });
     }
     setMeals(searchedMeals);
-    console.log(searchedMeals);
+    console.log(meals);
   };
 
   return (

@@ -2,7 +2,14 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Button from '../UI/Button';
 
-const Form = styled.form``;
+const Form = styled.form`
+  width: 100%;
+  text-align: center;
+
+  & label {
+    display: block;
+  }
+`;
 
 const SearchBar = props => {
   const mealInputPhrase = useRef();

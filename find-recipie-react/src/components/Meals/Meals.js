@@ -4,7 +4,10 @@ const Meals = props => {
   return (
     <ul>
       {props.meals.map(meal => (
-        <li>{meal.name}</li>
+        <li>
+          <p>{meal.name}</p>
+          <img src={meal.img}></img>
+        </li>
       ))}
     </ul>
   );
