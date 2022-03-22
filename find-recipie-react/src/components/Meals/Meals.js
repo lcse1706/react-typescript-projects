@@ -36,6 +36,10 @@ const List = styled.ul`
     transition: opacity 0.4s ease;
   }
 
+  .meal-info h3 {
+    pointer-events: none;
+  }
+
   & .meal-info:hover {
     opacity: 1;
   }
@@ -46,7 +50,9 @@ const Meals = props => {
     <List>
       {props.meals.map(meal => (
         <li>
-          <p className='meal-info'>{meal.name}</p>
+          <div className='meal-info'>
+            <h3>{meal.name}</h3>
+          </div>
           <img src={meal.img}></img>
         </li>
       ))}

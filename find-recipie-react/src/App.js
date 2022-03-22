@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './App.css';
 
 import Wrapper from './components/UI/Wrapper';
 import SearchBar from './components/Search/SearchBar';
@@ -7,10 +8,11 @@ import Meals from './components/Meals/Meals';
 
 function App() {
   const [meals, setMeals] = useState([]);
+  const [title, setTitle] = useState('');
 
-  const getMeals = async () => {
+  const getMeals = async mealPhrase => {
     const response = await fetch(
-      'https://www.themealdb.com/api/json/v1/1/search.php?s=chicken'
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealPhrase}`
     );
     const data = await response.json();
     console.log(data.meals);
@@ -35,6 +37,7 @@ function App() {
       });
     }
     setMeals(searchedMeals);
+    setTitle(mealPhrase);
     console.log(meals);
   };
 
@@ -42,6 +45,7 @@ function App() {
     <Wrapper>
       <ResetStyle />
       <SearchBar search={getMeals} />
+      <h2>{title && `Results for ${title}:`}</h2>
       <Meals meals={meals} />
     </Wrapper>
   );
