@@ -37,15 +37,19 @@ function App() {
       });
     }
     setMeals(searchedMeals);
-    setTitle(mealPhrase);
+    setTitle(`Results for ${mealPhrase}:`);
     console.log(meals);
+  };
+
+  const errorHandler = () => {
+    setTitle('Type Something !');
   };
 
   return (
     <Wrapper>
       <ResetStyle />
-      <SearchBar search={getMeals} />
-      <h2>{title && `Results for ${title}:`}</h2>
+      <SearchBar search={getMeals} onError={errorHandler} />
+      <h2>{title && title}</h2>
       <Meals meals={meals} />
     </Wrapper>
   );
