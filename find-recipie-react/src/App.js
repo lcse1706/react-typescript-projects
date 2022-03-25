@@ -5,9 +5,11 @@ import Wrapper from './components/UI/Wrapper';
 import SearchBar from './components/Search/SearchBar';
 import ResetStyle from './components/styled/Reset';
 import Meals from './components/Meals/Meals';
+import MealForm from './components/Meals/MealForm';
 
 function App() {
   const [meals, setMeals] = useState([]);
+  const [meal, setMeal] = useState(null);
   const [title, setTitle] = useState('');
 
   const getMeals = async mealPhrase => {
@@ -15,7 +17,7 @@ function App() {
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${mealPhrase}`
     );
     const data = await response.json();
-    console.log(data.meals);
+    // console.log(data.meals);
     const searchedMeals = [];
 
     for (const meal of data.meals) {
@@ -34,10 +36,12 @@ function App() {
         text: meal.strInstructions,
         img: meal.strMealThumb,
         ingredients,
+        key: meal.strMeal,
       });
     }
     setMeals(searchedMeals);
     setTitle(`Results for ${mealPhrase}:`);
+    setMeal(null);
     console.log(meals);
   };
 
@@ -45,12 +49,18 @@ function App() {
     setTitle('Type Something !');
   };
 
+  const setMealHandler = name => {
+    setMeal(meals.filter(meal => meal.name === name));
+    setTitle('');
+  };
+
   return (
     <Wrapper>
       <ResetStyle />
       <SearchBar search={getMeals} onError={errorHandler} />
       <h2>{title && title}</h2>
-      <Meals meals={meals} />
+      {!meal && <Meals meals={meals} setChosenMeal={setMealHandler} />}
+      {meal && <MealForm meal={meal} />}
     </Wrapper>
   );
 }

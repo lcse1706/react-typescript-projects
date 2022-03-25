@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import MealForm from './MealForm';
+import { useState } from 'react';
 
 const List = styled.ul`
   display: flex;
@@ -46,10 +48,15 @@ const List = styled.ul`
 `;
 
 const Meals = props => {
+  const displayMealHandler = e => {
+    // props.displayMealHandler(meal.key);
+    props.setChosenMeal(e.target.firstChild.textContent);
+  };
+
   return (
     <List>
       {props.meals.map(meal => (
-        <li>
+        <li key={meal.name} onClick={displayMealHandler}>
           <div className='meal-info'>
             <h3>{meal.name}</h3>
           </div>
