@@ -22,18 +22,6 @@ const Form = styled.form`
     outline: none;
   }
 
-  & Button {
-    font-size: 1rem;
-    padding: 0.5rem;
-    margin-left: 2rem;
-    border-radius: 5px;
-    background-color: #fff;
-  }
-
-  & Button:active {
-    background-color: #eee;
-  }
-
   & .error {
     border: 3px solid red;
     background-color: #f67f48;
@@ -48,7 +36,7 @@ const SearchBar = props => {
     e.preventDefault();
 
     if (mealInputPhrase.current.value.trim() === '') {
-      setError(true);
+      // setError(true);
       props.onError();
       mealInputPhrase.current.value = '';
       return;
@@ -63,7 +51,7 @@ const SearchBar = props => {
     <Form onSubmit={mealFinderHandler}>
       <h1>Meal Finder</h1>
       <input
-        className={error ? 'error' : undefined}
+        className={props.error ? 'error' : undefined}
         type='text'
         placeholder='Type dish or ingredient...'
         ref={mealInputPhrase}
