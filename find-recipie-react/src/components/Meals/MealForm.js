@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Button from '../UI/Button';
 
 const MealInfo = styled.div`
   display: flex;
@@ -24,12 +25,21 @@ const MealInfo = styled.div`
   }
   & p {
     text-indent: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  & Button {
+    transform: scale(1.2);
   }
 `;
 
 const MealForm = props => {
+  const backHandler = e => {
+    e.preventDefault();
+    props.back();
+  };
+
   const meal = props.meal[0];
-  console.log(meal);
   return (
     <MealInfo>
       <h2>{meal.name}</h2>
@@ -40,6 +50,7 @@ const MealForm = props => {
         ))}
       </ul>
       <p>{meal.text}</p>
+      <Button type='button' label='Back' onClick={backHandler} />
     </MealInfo>
   );
 };

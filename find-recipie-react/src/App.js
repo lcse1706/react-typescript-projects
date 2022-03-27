@@ -54,13 +54,17 @@ function App() {
     setTitle('');
   };
 
+  const backHandler = () => {
+    setMeal(null);
+  };
+
   return (
     <Wrapper>
       <ResetStyle />
       <SearchBar search={getMeals} onError={errorHandler} />
       <h2>{title && title}</h2>
       {!meal && <Meals meals={meals} setChosenMeal={setMealHandler} />}
-      {meal && <MealForm meal={meal} />}
+      {meal && <MealForm back={backHandler} meal={meal} />}
     </Wrapper>
   );
 }

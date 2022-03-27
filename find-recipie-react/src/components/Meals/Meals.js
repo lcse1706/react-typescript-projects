@@ -36,10 +36,13 @@ const List = styled.ul`
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
     transition: opacity 0.4s ease;
+    cursor: pointer;
   }
 
   .meal-info h3 {
     pointer-events: none;
+    padding: 1rem;
+    text-align: center;
   }
 
   & .meal-info:hover {
@@ -49,7 +52,6 @@ const List = styled.ul`
 
 const Meals = props => {
   const displayMealHandler = e => {
-    // props.displayMealHandler(meal.key);
     props.setChosenMeal(e.target.firstChild.textContent);
   };
 
