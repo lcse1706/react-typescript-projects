@@ -2,9 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ListItem = styled.li`
-  /* display: flex;
-  justify-content: space-between; */
-
   list-style: decimal inside;
 
   & button {
@@ -15,8 +12,7 @@ const ListItem = styled.li`
     cursor: pointer;
     border-radius: 10px;
     display: inline-block;
-    /* font-family: 'Pacifico', cursive; */
-    /* font-size: 25px; */
+ 
     color: #fff;
     text-decoration: none;
     transition: all 0.1s;
