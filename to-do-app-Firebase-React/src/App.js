@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+// import './App.css';
 import useHttp from './components/hooks/use-http';
 
 import NewTask from './components/NewTask/NewTask';
@@ -28,7 +28,7 @@ function App() {
 
       sendRequest(
         {
-          url: 'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json',
+          url: 'https://todoupdate-c7e54-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json',
         },
         restoreTasks
       );
@@ -53,7 +53,7 @@ function App() {
 
     sendRequest(
       {
-        url: 'https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json',
+        url: 'https://todoupdate-c7e54-default-rtdb.europe-west1.firebasedatabase.app/toDoApp.json',
         method: 'POST',
         body: task,
         headers: {
@@ -72,7 +72,7 @@ function App() {
 
     sendRequest(
       {
-        url: `https://myapps-25ff9-default-rtdb.europe-west1.firebasedatabase.app/toDoApp/${key}.json`,
+        url: `https://todoupdate-c7e54-default-rtdb.europe-west1.firebasedatabase.app/toDoApp/${key}.json`,
         method: 'DELETE',
       },
       deleteInfo
