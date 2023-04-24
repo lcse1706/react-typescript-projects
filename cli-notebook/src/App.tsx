@@ -24,6 +24,9 @@ const App = () => {
       return;
     }
 
+    //Reset iframe to 
+    iframe.current.srcdoc = html;
+
     const result = await ref.current.build({
       entryPoints: ['index.js'],
       bundle: true,
@@ -37,8 +40,6 @@ const App = () => {
         global: 'window',
       }
     });
-
-    // setCode(result.outputFiles[0].text);
 
     iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*')
   };
