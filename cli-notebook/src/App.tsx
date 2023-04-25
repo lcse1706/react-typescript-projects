@@ -4,7 +4,6 @@ import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 import { fetchPlugin } from './plugins/fetch-plugin';
 import CodeEditor from './components/code-editor';
 
-
 const App = () => {
   const ref = useRef<any>();
   const iframe = useRef<any>();
@@ -25,24 +24,21 @@ const App = () => {
       return;
     }
 
-    //Reset iframe to 
+    //Reset iframe to
     iframe.current.srcdoc = html;
 
     const result = await ref.current.build({
       entryPoints: ['index.js'],
       bundle: true,
       write: false,
-      plugins: [
-        unpkgPathPlugin(),
-        fetchPlugin(input)
-      ],
+      plugins: [unpkgPathPlugin(), fetchPlugin(input)],
       define: {
         'process.env.NODE_ENV': '"production"',
         global: 'window',
-      }
+      },
     });
 
-    iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*')
+    iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*');
   };
 
   const html = `
@@ -66,18 +62,25 @@ const App = () => {
     </html>
   `;
 
-
   return (
     <div>
-      <CodeEditor initialValue="const a = 1;" onChange={(value) => setInput(value) }/>
+      <CodeEditor
+        initialValue='const a = 1;'
+        onChange={value => setInput(value)}
+      />
       <textarea
         value={input}
-        onChange={(e) => setInput(e.target.value)}
+        onChange={e => setInput(e.target.value)}
       ></textarea>
       <div>
         <button onClick={onClick}>Submit</button>
       </div>
-      <iframe title='preview' ref={iframe} sandbox="allow-scripts" srcDoc={html} />
+      <iframe
+        title='preview'
+        ref={iframe}
+        sandbox='allow-scripts'
+        srcDoc={html}
+      />
     </div>
   );
 };

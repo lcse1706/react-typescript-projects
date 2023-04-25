@@ -1,4 +1,4 @@
-import MonacoEditor, { EditorDidMount }from '@monaco-editor/react';
+import MonacoEditor, { EditorDidMount } from '@monaco-editor/react';
 
 interface CodeEditorProps {
   initialValue: string;
@@ -6,7 +6,6 @@ interface CodeEditorProps {
 }
 
 const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
-
   // onChange works as expected
   const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
     monacoEditor.onDidChangeModelContent(() => {
@@ -20,9 +19,9 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
     <MonacoEditor
       editorDidMount={onEditorDidMount}
       value={initialValue}
-      theme="dark"
-      language="javascript"
-      height="500px"
+      theme='dark'
+      language='javascript'
+      height='500px'
       options={{
         wordWrap: 'on',
         minimap: { enabled: false },
