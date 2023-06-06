@@ -20,6 +20,9 @@ const createCellsRouter = (filename, dir) => {
     const router = express_1.default.Router();
     const fullPath = path_1.default.join(dir, filename);
     router.get('/cells', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const isLocalApiError = (err) => {
+            return typeof err.code === 'string';
+        };
         try {
             // Read the file
             const result = yield promises_1.default.readFile(fullPath, { encoding: 'utf-8' });
@@ -27,8 +30,8 @@ const createCellsRouter = (filename, dir) => {
         }
         catch (err) {
             if (isLocalApiError(err)) {
-                if (err.code === "ENOENT") {
-                    yield promises_1.default.writeFile(fullPath, "[]", "utf-8");
+                if (err.code === 'ENOENT') {
+                    yield promises_1.default.writeFile(fullPath, '[]', 'utf-8');
                     res.send([]);
                 }
             }
@@ -45,11 +48,6 @@ const createCellsRouter = (filename, dir) => {
         yield promises_1.default.writeFile(fullPath, JSON.stringify(cells), 'utf-8');
         res.send({ status: 'ok' });
     }));
-    return router.get("/cells", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const isLocalApiError = (err) => {
-            return typeof err.code === "string";
-        };
-        ;
-    }));
+    return router;
 };
 exports.createCellsRouter = createCellsRouter;

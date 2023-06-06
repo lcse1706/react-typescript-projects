@@ -18,6 +18,9 @@ export const createCellsRouter = (filename: string, dir: string) => {
   const fullPath = path.join(dir, filename);
 
   router.get('/cells', async (req, res) => {
+    const isLocalApiError = (err: any): err is LocalApiError => {
+      return typeof err.code === 'string';
+    };
     try {
       // Read the file
       const result = await fs.readFile(fullPath, { encoding: 'utf-8' });
@@ -25,8 +28,8 @@ export const createCellsRouter = (filename: string, dir: string) => {
       res.send(JSON.parse(result));
     } catch (err) {
       if (isLocalApiError(err)) {
-        if (err.code === "ENOENT") {
-          await fs.writeFile(fullPath, "[]", "utf-8");
+        if (err.code === 'ENOENT') {
+          await fs.writeFile(fullPath, '[]', 'utf-8');
           res.send([]);
         }
       } else {
@@ -46,8 +49,5 @@ export const createCellsRouter = (filename: string, dir: string) => {
     res.send({ status: 'ok' });
   });
 
-  return  router.get("/cells", async (req, res) => {
-    const isLocalApiError = (err: any): err is LocalApiError => {
-      return typeof err.code === "string";
-    };;
+  return router;
 };
