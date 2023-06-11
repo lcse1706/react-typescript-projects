@@ -1,6 +1,6 @@
 {
   "name": "clinotebook",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "publishConfig": {
     "access": "public"
@@ -17,10 +17,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@clinotebook/local-client": "^1.0.0"
+    "@clinotebook/local-client": "^2.0.0"
   },
   "devDependencies": {
-    "@clinotebook/local-api": "^1.0.0",
+    "@clinotebook/local-api": "^2.0.0",
     "@types/node": "^20.2.4",
     "commander": "^10.0.1",
     "esbuild": "0.8.26",
