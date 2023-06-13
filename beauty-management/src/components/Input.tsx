@@ -5,10 +5,12 @@ interface inputProps {
   type: string;
 }
 
+// dlaczego jak wpisuje HTMLInputElement to err
 const Input = React.forwardRef((props: inputProps, ref: any) => {
   return (
     <div>
-      <label>{props.label}</label> <input ref={ref} type={props.type}></input>
+      <label>{props.label}</label>
+      <input ref={ref} type={props.type}></input>
     </div>
   );
 });
