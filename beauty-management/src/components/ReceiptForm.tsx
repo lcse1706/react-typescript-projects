@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import Input from './Input';
+import './ReceiptForm.css';
 
 const ReceiptForm = () => {
   const [treatment, setTreatment] = useState('');
@@ -24,7 +25,7 @@ const ReceiptForm = () => {
 
     clientNameRef.current.value = '';
     clientEmailRef.current.value = '';
-    treatmentRef.current.value = '';
+    //Figure out how reset select after submit
     priceRef.current.value = '';
   };
 
@@ -36,17 +37,20 @@ const ReceiptForm = () => {
     //Add some validation
 
     <form onSubmit={submitHandler}>
-      <Input ref={clientNameRef} label='Client Name' type='text' />
-      <Input ref={clientEmailRef} label='Client Email' type='email' />
-      <label>
+      <Input ref={clientNameRef} label='Client Name:' type='text' />
+      <Input ref={clientEmailRef} label='Client Email:' type='email' />
+      <label className='label'>
         Treatment:
         <select ref={treatmentRef} value={treatment} onChange={handleChange}>
+          <option value='' disabled hidden>
+            Choose here
+          </option>
           <option value='lashes'>Lashes</option>
           <option value='brown'>Brown</option>
           <option value='nails'>Nails</option>
         </select>
       </label>
-      <Input ref={priceRef} label='Price' type='number' />
+      <Input ref={priceRef} label='Price:' type='number' />
       <button type='submit'>Send</button>
     </form>
   );
