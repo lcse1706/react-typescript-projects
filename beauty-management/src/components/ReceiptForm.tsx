@@ -1,10 +1,16 @@
-import { useRef, useState } from 'react';
-import dataExecute from './dataExecute';
+import { useRef, useState, useEffect } from 'react';
+import sendReceipt from './sendReceipt';
 import Input from './Input';
 import './ReceiptForm.css';
 
 const ReceiptForm = () => {
   const [treatment, setTreatment] = useState('');
+  const [receiptsArray, setReceiptsArray] = useState(Array<object>);
+
+  useEffect(() => {
+    // rerender receipt list
+    console.dir(receiptsArray);
+  }, [receiptsArray]);
 
   // dlaczego jak wpisuje HTMLInputElement to err
   const clientNameRef = useRef<any>();
@@ -15,7 +21,6 @@ const ReceiptForm = () => {
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
-    //think how to use useEffect to data object
     const data = {
       name: clientNameRef.current.value,
       email: clientEmailRef.current.value,
@@ -23,7 +28,11 @@ const ReceiptForm = () => {
       price: priceRef.current.value,
     };
 
-    dataExecute(data);
+    // 1.Save array to display and edit if needed, 2.load from the server
+    setReceiptsArray(current => [...current, data]);
+
+    // Send data to make a form and send it to client
+    sendReceipt(data);
 
     clientNameRef.current.value = '';
     clientEmailRef.current.value = '';
