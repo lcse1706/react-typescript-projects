@@ -25,7 +25,7 @@ const ReceiptForm = () => {
 
     clientNameRef.current.value = '';
     clientEmailRef.current.value = '';
-    //Figure out how reset select after submit
+    setTreatment('');
     priceRef.current.value = '';
   };
 
