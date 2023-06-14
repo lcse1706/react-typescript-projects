@@ -34,6 +34,7 @@ const ReceiptForm = () => {
     // Send data to make a form and send it to client
     sendReceipt(data);
 
+    // Reset inputs
     clientNameRef.current.value = '';
     clientEmailRef.current.value = '';
     setTreatment('');
