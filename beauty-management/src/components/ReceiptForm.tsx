@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import dataExecute from './dataExecute';
 import Input from './Input';
 import './ReceiptForm.css';
 
@@ -14,14 +15,15 @@ const ReceiptForm = () => {
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
-    //think how yo use useEffect to data object
+    //think how to use useEffect to data object
     const data = {
       name: clientNameRef.current.value,
       email: clientEmailRef.current.value,
       treatment: treatmentRef.current.value,
       price: priceRef.current.value,
     };
-    console.log(data);
+
+    dataExecute(data);
 
     clientNameRef.current.value = '';
     clientEmailRef.current.value = '';
