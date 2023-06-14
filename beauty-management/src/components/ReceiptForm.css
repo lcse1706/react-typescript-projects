@@ -1,4 +1,4 @@
-form {
+.receiptForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,5 +14,5 @@ form {
 }
 
 .label select {
-  width: 177px;
+  width: 40%;
 }

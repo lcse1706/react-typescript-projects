@@ -48,7 +48,7 @@ const ReceiptForm = () => {
   return (
     //Add some validation
 
-    <form onSubmit={submitHandler}>
+    <form className='receiptForm' onSubmit={submitHandler}>
       <Input ref={clientNameRef} label='Client Name:' type='text' />
       <Input ref={clientEmailRef} label='Client Email:' type='email' />
       <label className='label'>

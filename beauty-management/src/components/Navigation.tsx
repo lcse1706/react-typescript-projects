@@ -1,8 +1,8 @@
-import React from 'react';
+import './Navigation.css';
 
 const Navigation = (props: { isLoggedIn: boolean; onLogout: any }) => {
   return (
-    <nav>
+    <nav className='mainNav'>
       <ul>
         {props.isLoggedIn && (
           <li>
