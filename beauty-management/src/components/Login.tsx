@@ -1,12 +1,14 @@
-import { useRef } from 'react';
+import { FormEventHandler, useRef } from 'react';
 import Input from './Input';
 import './Login.css';
 
 const Login = (props: { loginHandler: any }) => {
-  const loginRef = useRef();
-  const passRef = useRef();
+  //domyslnie do czego ref bedzie przypisanny
+  const loginRef = useRef<HTMLInputElement>(null);
+  const passRef = useRef<HTMLInputElement>(null);
 
-  const loginHandler = () => {
+  // Okreslamy na jakim elemencie dziala funkcja
+  const loginHandler: FormEventHandler<HTMLButtonElement> = () => {
     props.loginHandler(true);
   };
 

@@ -1,11 +1,11 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, ChangeEventHandler } from 'react';
 import sendReceipt from './sendReceipt';
 import Input from './Input';
 import './ReceiptForm.css';
 
 const ReceiptForm = () => {
-  const [treatment, setTreatment] = useState('');
-  const [receiptsArray, setReceiptsArray] = useState(Array<object>);
+  // const [treatment, setTreatment] = useState('');
+  const [receiptsArray, setReceiptsArray] = useState(Array<object>); //useState<Receipt[]>([])
 
   useEffect(() => {
     // rerender receipt list
@@ -18,8 +18,8 @@ const ReceiptForm = () => {
   const treatmentRef = useRef<any>();
   const priceRef = useRef<any>();
 
-  const submitHandler = (e: React.FormEvent) => {
-    e.preventDefault();
+  const submitHandler = (event: React.FormEvent) => {
+    event.preventDefault();
 
     const data = {
       name: clientNameRef.current.value,
@@ -34,26 +34,32 @@ const ReceiptForm = () => {
     // Send data to make a form and send it to client
     sendReceipt(data);
 
-    // Reset inputs
+    // Reset inputs - przeniesc do osobnej funcjki
     clientNameRef.current.value = '';
     clientEmailRef.current.value = '';
-    setTreatment('');
+    treatmentRef.current.value = '';
+    // setTreatment('');
     priceRef.current.value = '';
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setTreatment(e.target.value);
-  };
+  // const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  // const handleChange: ChangeEventHandler<HTMLSelectElement> = event => {
+  //   setTreatment(event.target.value);
+  // };
 
+  const treatment = 'Choose here';
   return (
-    //Add some validation
+    //TODO: Add some validation
 
     <form className='receiptForm' onSubmit={submitHandler}>
       <Input ref={clientNameRef} label='Client Name:' type='text' />
       <Input ref={clientEmailRef} label='Client Email:' type='email' />
       <label className='label'>
         Treatment:
-        <select ref={treatmentRef} value={treatment} onChange={handleChange}>
+        <select
+          ref={treatmentRef}
+          defaultValue={treatment} /*value={treatment} onChange={handleChange}*/
+        >
           <option value='' disabled hidden>
             Choose here
           </option>
